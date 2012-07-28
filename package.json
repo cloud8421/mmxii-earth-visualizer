@@ -1,0 +1,16 @@
+{
+  "name": "mmxii-earth-visualizer",
+  "description": "Olympic data on a 3D globe",
+  "version": "0.0.1",
+  "author": {
+    "name": "Claudio Ortolina",
+    "email": "claudio@new-bamboo.co.uk"
+  },
+  "dependencies": {
+    "grunt": "~0.3.11",
+    "grunt-coffee": "~0.0.2",
+    "coffee-script": "~1.3.3",
+    "grunt-reload": "~0.2.0",
+    "grunt-shell": "~0.1.2"
+  }
+}
