@@ -6,21 +6,40 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script type="text/javascript" src="/vendor/jstorage.js"></script>
     <script type="text/javascript" src="/vendor/mustache.js"></script>
+    <script type="text/javascript" src="/vendor/moment.js"></script>
     <link rel="stylesheet" href="/css/foundation.css" type="text/css" media="screen" charset="utf-8">
     <link rel="stylesheet" href="/css/master.css" type="text/css" media="screen" charset="utf-8">
     <title>Mmxii Earth Visualizer</title>
     <!-- include source files here... -->
     <script type="text/mustache" id="tweet-template">
-      <h6>From {{ from_user}}</h6>
-      <p>{{ text }}</p>
+      <div class="tweet panel callout radius">
+        <span class="label alert radius">{{ from_user}}</span>
+        <span class="label success radius">{{ created_at }}</span>
+        <img src="{{ profile_image_url }}" alt="{{ from_user }}" />
+        <p>{{ text }}</p>
+      </div>
     </script>
     <script type="text/javascript" src="build/mmxii-earth-visualizer.js"></script>
   </head>
   <body>
-    <header>
-      <button class="button large" id="close-popups">Close popups</button>
-      <button class="button large" id="next-marker">Next marker</button>
-    </header>
-    <div id="container"></div>
+    <div id="mainContent">
+      <header class="row">
+        <div class="twelve columns">
+          <h1>Olympic Tweets on Earth</h1>
+        </div>
+      </header>
+      <div class="row">
+        <div class="twelve columns" id="earth-container"></div>
+      </div>
+      <footer class="row">
+        <div class="twelve columns">
+          <p>
+          Developed by <a href="http://claudio-ortolina.org">Claudio ortolina</a>.
+          | Source on <a href="http://github.com/cloud8421/mmxii-earth-visualizer">Github</a>.
+          | A project for <a href="http://mmxiihack.org">Londinium MMXII Hackathon</a>
+          </p>
+        </div>
+      </footer>
+    </div>
   </body>
 </html>

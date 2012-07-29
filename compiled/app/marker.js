@@ -14,14 +14,21 @@ MmxiiEarth.Views.Marker = (function() {
 
   Marker.prototype.render = function() {
     var popup;
+    this.tweet.created_at = this.humanizeDate(this.tweet.created_at);
     popup = Mustache.render(this.template, this.tweet);
-    return this.earthMarker.bindPopup(popup);
+    return this.earthMarker.bindPopup(popup, 400, false);
   };
 
   Marker.prototype.rotateToMarker = function() {
     var _ref;
     (_ref = this.earth).flyTo.apply(_ref, this.tweet.geo.coordinates);
     return this.earthMarker.openPopup();
+  };
+
+  Marker.prototype.humanizeDate = function(created_at) {
+    var date;
+    date = new Date(created_at);
+    return moment(date).calendar();
   };
 
   return Marker;

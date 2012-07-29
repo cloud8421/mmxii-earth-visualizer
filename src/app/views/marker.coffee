@@ -7,12 +7,17 @@ class MmxiiEarth.Views.Marker
   template: $('#tweet-template').html()
 
   render: ->
+    @tweet.created_at = @humanizeDate(@tweet.created_at)
     popup = Mustache.render(@template, @tweet)
-    @earthMarker.bindPopup popup
+    @earthMarker.bindPopup popup, 400, false
 
   rotateToMarker: ->
     @earth.flyTo @tweet.geo.coordinates...
     @earthMarker.openPopup()
+
+  humanizeDate: (created_at) ->
+    date = new Date(created_at)
+    moment(date).calendar()
 
 class MmxiiEarth.Views.MarkersList
 
