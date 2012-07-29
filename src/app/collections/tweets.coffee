@@ -14,5 +14,4 @@ class MmxiiEarth.Collections.Tweets
             $.jStorage.set(tweet.id, tweet)
 
   all: ->
-    $.jStorage.get(key) for key in $.jStorage.index()
-
+    shuffle($.jStorage.get(key) for key in $.jStorage.index())

@@ -36,7 +36,12 @@ header h1 {
   font-weight: 700;
 }
 
+.tweet a {
+  color: yellow !important;
+}
+
 footer p {
+  margin-top: 40px;
   color: white;
   text-align: center;
 }

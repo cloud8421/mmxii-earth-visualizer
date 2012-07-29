@@ -74,6 +74,7 @@ MmxiiEarth.Views.Marker = (function() {
   Marker.prototype.render = function() {
     var popup;
     this.tweet.created_at = this.humanizeDate(this.tweet.created_at);
+    this.tweet.text = this.tweet.text.parseURL().parseUsername().parseHashtag();
     popup = Mustache.render(this.template, this.tweet);
     return this.earthMarker.bindPopup(popup, 400, false);
   };
@@ -104,7 +105,7 @@ MmxiiEarth.Views.MarkersList = (function() {
     this.listen();
     setInterval(function() {
       return _this.rotate();
-    }, 5000);
+    }, 8000);
   }
 
   MarkersList.prototype.add = function(marker) {
@@ -171,14 +172,17 @@ MmxiiEarth.Collections.Tweets = (function() {
   };
 
   Tweets.prototype.all = function() {
-    var key, _i, _len, _ref, _results;
-    _ref = $.jStorage.index();
-    _results = [];
-    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-      key = _ref[_i];
-      _results.push($.jStorage.get(key));
-    }
-    return _results;
+    var key;
+    return shuffle((function() {
+      var _i, _len, _ref, _results;
+      _ref = $.jStorage.index();
+      _results = [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        key = _ref[_i];
+        _results.push($.jStorage.get(key));
+      }
+      return _results;
+    })());
   };
 
   return Tweets;

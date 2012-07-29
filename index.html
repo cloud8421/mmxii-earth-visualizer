@@ -7,6 +7,8 @@
     <script type="text/javascript" src="/vendor/jstorage.js"></script>
     <script type="text/javascript" src="/vendor/mustache.js"></script>
     <script type="text/javascript" src="/vendor/moment.js"></script>
+    <script type="text/javascript" src="/vendor/shuffle.js"></script>
+    <script type="text/javascript" src="/vendor/twitter_parse.js"></script>
     <link rel="stylesheet" href="/css/foundation.css" type="text/css" media="screen" charset="utf-8">
     <link rel="stylesheet" href="/css/master.css" type="text/css" media="screen" charset="utf-8">
     <title>Mmxii Earth Visualizer</title>
@@ -16,7 +18,7 @@
         <span class="label alert radius">{{ from_user}}</span>
         <span class="label success radius">{{ created_at }}</span>
         <img src="{{ profile_image_url }}" alt="{{ from_user }}" />
-        <p>{{ text }}</p>
+        <p>{{{ text }}}</p>
       </div>
     </script>
     <script type="text/javascript" src="build/mmxii-earth-visualizer.js"></script>
