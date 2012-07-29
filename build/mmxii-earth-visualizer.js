@@ -1,9 +1,148 @@
-/*! mmxii-earth-visualizer - v0.0.1 - 2012-07-28
+/*! mmxii-earth-visualizer - v0.0.1 - 2012-07-29
 * Copyright (c) 2012 Claudio Ortolina; Licensed  */
 
 
-window.MmxiiEarthVisualizer = {
+window.MmxiiEarth = {
   Models: {},
   Collections: {},
   Views: {}
 };
+
+$(document).ready(function() {
+  window.tweets = new MmxiiEarth.Collections.Tweets;
+  tweets.fetch();
+  window.earthPlotter = new MmxiiEarth.Views.EarthPlotter(tweets.all());
+  return earthPlotter.plot();
+});
+
+
+MmxiiEarth.Views.EarthPlotter = (function() {
+
+  function EarthPlotter(tweets) {
+    var options;
+    this.tweets = tweets;
+    options = {
+      zoom: 0.2,
+      position: [51.3051, -1.0543]
+    };
+    this.earth = new WebGLEarth('container', options);
+  }
+
+  EarthPlotter.prototype.plot = function() {
+    var tweet, _i, _len, _ref, _results,
+      _this = this;
+    console.log("Plotting " + this.tweets.length + " tweets...");
+    this.markersList = new MmxiiEarth.Views.MarkersList;
+    _ref = this.tweets;
+    _results = [];
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      tweet = _ref[_i];
+      _results.push((function(tweet) {
+        return _this.markersList.add(new MmxiiEarth.Views.Marker(_this.earth, tweet));
+      })(tweet));
+    }
+    return _results;
+  };
+
+  return EarthPlotter;
+
+})();
+
+
+MmxiiEarth.Views.Marker = (function() {
+
+  function Marker(earth, tweet) {
+    var _ref;
+    this.earth = earth;
+    this.tweet = tweet;
+    this.earthMarker = (_ref = this.earth).initMarker.apply(_ref, this.tweet.geo.coordinates);
+    this.render();
+  }
+
+  Marker.prototype.template = $('#tweet-template').html();
+
+  Marker.prototype.render = function() {
+    var popup;
+    popup = Mustache.render(this.template, this.tweet);
+    return this.earthMarker.bindPopup(popup);
+  };
+
+  return Marker;
+
+})();
+
+MmxiiEarth.Views.MarkersList = (function() {
+
+  function MarkersList() {
+    this.list = [];
+    this.listen();
+  }
+
+  MarkersList.prototype.add = function(marker) {
+    return this.list.push(marker);
+  };
+
+  MarkersList.prototype.hide = function() {
+    var marker, _i, _len, _ref, _results;
+    _ref = this.list;
+    _results = [];
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      marker = _ref[_i];
+      _results.push(marker.earthMarker.closePopup());
+    }
+    return _results;
+  };
+
+  MarkersList.prototype.listen = function() {
+    var _this = this;
+    return $('body').on('click', '#close-popups', function() {
+      return _this.hide();
+    });
+  };
+
+  return MarkersList;
+
+})();
+
+var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+
+MmxiiEarth.Collections.Tweets = (function() {
+
+  Tweets.prototype.query = 'http://search.twitter.com/search.json?q=%23Olympics%20OR%20%23London2012%20OR%20%23Olympic&geocode=51.3051,-1.0543,10000km&rpp=100&callback=?';
+
+  function Tweets() {
+    this.fetch = __bind(this.fetch, this);
+    this.fetch;
+  }
+
+  Tweets.prototype.fetch = function() {
+    return $.getJSON(this.query, function(data) {
+      var tweet, _i, _len, _ref, _results;
+      _ref = data.results;
+      _results = [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        tweet = _ref[_i];
+        _results.push((function(tweet) {
+          if (tweet.geo !== null) {
+            return $.jStorage.set(tweet.id, tweet);
+          }
+        })(tweet));
+      }
+      return _results;
+    });
+  };
+
+  Tweets.prototype.all = function() {
+    var key, _i, _len, _ref, _results;
+    _ref = $.jStorage.index();
+    _results = [];
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      key = _ref[_i];
+      _results.push($.jStorage.get(key));
+    }
+    return _results;
+  };
+
+  return Tweets;
+
+})();
