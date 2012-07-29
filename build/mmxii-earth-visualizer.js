@@ -10,6 +10,7 @@ window.MmxiiEarth = {
 
 $(document).ready(function() {
   window.tweets = new MmxiiEarth.Collections.Tweets;
+  tweets.fetch();
   window.earthPlotter = new MmxiiEarth.Views.EarthPlotter(tweets.all());
   return earthPlotter.plot();
 });
@@ -130,7 +131,7 @@ var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments)
 
 MmxiiEarth.Collections.Tweets = (function() {
 
-  Tweets.prototype.query = 'http://search.twitter.com/search.json?q=%23Olympics%20OR%20%23London2012%20OR%20%23Olympic&geocode=51.3051,-1.0543,10000km&rpp=100&callback=?';
+  Tweets.prototype.query = '/sample_data.json';
 
   function Tweets() {
     this.fetch = __bind(this.fetch, this);
@@ -139,11 +140,10 @@ MmxiiEarth.Collections.Tweets = (function() {
 
   Tweets.prototype.fetch = function() {
     return $.getJSON(this.query, function(data) {
-      var tweet, _i, _len, _ref, _results;
-      _ref = data.results;
+      var tweet, _i, _len, _results;
       _results = [];
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        tweet = _ref[_i];
+      for (_i = 0, _len = data.length; _i < _len; _i++) {
+        tweet = data[_i];
         _results.push((function(tweet) {
           if (tweet.geo !== null) {
             return $.jStorage.set(tweet.id, tweet);
