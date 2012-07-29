@@ -10,7 +10,6 @@ window.MmxiiEarth = {
 
 $(document).ready(function() {
   window.tweets = new MmxiiEarth.Collections.Tweets;
-  tweets.fetch();
   window.earthPlotter = new MmxiiEarth.Views.EarthPlotter(tweets.all());
   return earthPlotter.plot();
 });
@@ -48,6 +47,7 @@ MmxiiEarth.Views.EarthPlotter = (function() {
 
 })();
 
+var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
 MmxiiEarth.Views.Marker = (function() {
 
@@ -67,6 +67,12 @@ MmxiiEarth.Views.Marker = (function() {
     return this.earthMarker.bindPopup(popup);
   };
 
+  Marker.prototype.rotateToMarker = function() {
+    var _ref;
+    (_ref = this.earth).flyTo.apply(_ref, this.tweet.geo.coordinates);
+    return this.earthMarker.openPopup();
+  };
+
   return Marker;
 
 })();
@@ -74,8 +80,14 @@ MmxiiEarth.Views.Marker = (function() {
 MmxiiEarth.Views.MarkersList = (function() {
 
   function MarkersList() {
+    this.rotate = __bind(this.rotate, this);
+
+    var _this = this;
     this.list = [];
     this.listen();
+    setInterval(function() {
+      return _this.rotate();
+    }, 5000);
   }
 
   MarkersList.prototype.add = function(marker) {
@@ -97,7 +109,17 @@ MmxiiEarth.Views.MarkersList = (function() {
     var _this = this;
     return $('body').on('click', '#close-popups', function() {
       return _this.hide();
+    }).on('click', '#next-marker', function() {
+      return _this.rotate();
     });
+  };
+
+  MarkersList.prototype.rotate = function() {
+    var cm;
+    this.hide();
+    cm = this.list.shift();
+    this.list.push(cm);
+    return cm.rotateToMarker();
   };
 
   return MarkersList;

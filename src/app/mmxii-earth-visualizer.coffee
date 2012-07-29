@@ -6,6 +6,6 @@ window.MmxiiEarth =
 $(document).ready ->
 
   window.tweets = new MmxiiEarth.Collections.Tweets
-  tweets.fetch()
+  # tweets.fetch()
   window.earthPlotter = new MmxiiEarth.Views.EarthPlotter(tweets.all())
   earthPlotter.plot()
