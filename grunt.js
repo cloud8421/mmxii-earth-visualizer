@@ -30,7 +30,7 @@ module.exports = function(grunt) {
     },
     concat: {
       app: {
-        src: ['<banner:meta.banner>', 'compiled/app/**/*.js'],
+        src: ['<banner:meta.banner>', 'compiled/app/<%= pkg.name %>.js', 'compiled/app/**/*.js'],
         dest: 'build/<%= pkg.name %>.js'
       },
       spec: {
@@ -39,6 +39,7 @@ module.exports = function(grunt) {
       },
       vendor: {
         src: [ 'vendor/jquery.min.js',
+               'vendor/lawnchair.js',
                'vendor/jasmine-1.2.0/jasmine.js',
                'vendor/jasmine-1.2.0/jasmine-html.js',
                'vendor/jasmine-console.js',
@@ -73,6 +74,6 @@ module.exports = function(grunt) {
   });
 
   // Default task.
-  grunt.registerTask('default', 'coffee concat min shell server reload watch');
+  grunt.registerTask('default', 'coffee concat min server reload watch');
 
 };
