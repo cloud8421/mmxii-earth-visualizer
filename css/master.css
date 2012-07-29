@@ -1,0 +1,10 @@
+body {
+  background-color: black;
+  padding: 60px;
+}
+
+#container {
+  width: 800px;
+  height: 600px;
+  margin: 0 auto;
+}

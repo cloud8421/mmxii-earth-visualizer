@@ -1,0 +1,25 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <script src="http://www.webglearth.com/api.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript" src="/vendor/jstorage.js"></script>
+    <script type="text/javascript" src="/vendor/mustache.js"></script>
+    <link rel="stylesheet" href="/css/foundation.css" type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="/css/master.css" type="text/css" media="screen" charset="utf-8">
+    <title>Mmxii Earth Visualizer</title>
+    <!-- include source files here... -->
+    <script type="text/mustache" id="tweet-template">
+      <h6>From {{ from_user}}</h6>
+      <p>{{ text }}</p>
+    </script>
+    <script type="text/javascript" src="build/mmxii-earth-visualizer.js"></script>
+  </head>
+  <body>
+    <header>
+      <button class="button large" id="close-popups">Close popups</button>
+    </header>
+    <div id="container"></div>
+  </body>
+</html>
