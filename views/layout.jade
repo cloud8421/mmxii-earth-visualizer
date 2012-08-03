@@ -1,0 +1,17 @@
+doctype 5
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/foundation.css')
+    link(rel='stylesheet', href='/stylesheets/master.css')
+    script(type='text/mustache', id="tweet-template")
+      div.tweet.panel.callout.radius
+        span.label.alert.radius {{ from_user }}
+        span.label.success.radius {{ created_at }}
+        img(src='{{ profile_image_url }}', alt='{{ from_user }}')
+        p {{{ text }}}
+    script(src='http://www.webglearth.com/api.js')
+    script(src='/javascripts/vendor.js')
+    script(src='/javascripts/mmxii-earth-visualizer.min.js')
+  body
+    block content

@@ -2,7 +2,7 @@ var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments)
 
 MmxiiEarth.Collections.Tweets = (function() {
 
-  Tweets.prototype.query = '/sample/sample_data.json';
+  Tweets.prototype.query = '/api.json';
 
   function Tweets() {
     this.fetch = __bind(this.fetch, this);

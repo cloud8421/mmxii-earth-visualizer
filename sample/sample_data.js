@@ -1,4 +1,4 @@
-[
+var sample_data = [
   {
     "created_at": "Sat, 28 Jul 2012 15:33:17 +0000",
     "from_user": "nancybroden",
@@ -2306,3 +2306,5 @@
     "to_user_name": null
   }
 ]
+
+module.exports = sample_data;

@@ -31,26 +31,26 @@ module.exports = function(grunt) {
     concat: {
       app: {
         src: ['<banner:meta.banner>', 'compiled/app/<%= pkg.name %>.js', 'compiled/app/**/*.js'],
-        dest: 'build/<%= pkg.name %>.js'
+        dest: 'public/javascripts/<%= pkg.name %>.js'
       },
       spec: {
         src: 'compiled/spec/**/*.js',
         dest: 'build/<%= pkg.name %>_spec.js'
       },
       vendor: {
-        src: [ 'vendor/jquery.min.js',
-               'vendor/lawnchair.js',
-               'vendor/jasmine-1.2.0/jasmine.js',
-               'vendor/jasmine-1.2.0/jasmine-html.js',
-               'vendor/jasmine-console.js',
-               'vendor/jasmine-jquery.js' ],
-        dest: 'build/vendor.js'
+        src: [ 'vendor/app/jquery.min.js',
+               'vendor/app/jstorage.js',
+               'vendor/app/shuffle.js',
+               'vendor/app/moment.js',
+               'vendor/app/mustache.js',
+               'vendor/app/twitter_parse.js' ],
+        dest: 'public/javascripts/vendor.js'
       }
     },
     min: {
       dist: {
         src: ['<banner:meta.banner>', '<config:concat.app.dest>'],
-        dest: 'build/<%= pkg.name %>.min.js'
+        dest: 'public/javascripts/<%= pkg.name %>.min.js'
       }
     },
     reload: {

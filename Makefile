@@ -4,3 +4,5 @@ update:
 	curl -o vendor/jquery.min.js http://code.jquery.com/jquery.min.js
 test:
 	phantomjs vendor/jasmine_runner.coffee HeadlessRunner.html
+devserver:
+	./node_modules/node-dev/node-dev app.js

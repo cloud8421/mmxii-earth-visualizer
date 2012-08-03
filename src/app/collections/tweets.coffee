@@ -1,7 +1,7 @@
 class MmxiiEarth.Collections.Tweets
 
   # query: 'http://search.twitter.com/search.json?q=%23Olympics%20OR%20%23London2012%20OR%20%23Olympic&geocode=51.3051,-1.0543,10000km&rpp=100&callback=?'
-  query: '/sample/sample_data.json'
+  query: '/api.json'
 
   constructor: ->
     @fetch
