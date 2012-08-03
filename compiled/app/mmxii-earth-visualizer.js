@@ -6,8 +6,16 @@ window.MmxiiEarth = {
 };
 
 $(document).ready(function() {
+  var socket;
   window.tweets = new MmxiiEarth.Collections.Tweets;
   tweets.fetch();
   window.earthPlotter = new MmxiiEarth.Views.EarthPlotter(tweets.all());
-  return earthPlotter.plot();
+  earthPlotter.plot();
+  socket = io.connect('http://localhost');
+  return socket.on('news', function(data) {
+    console.log(data);
+    return socket.emit('my other event', {
+      my: 'data'
+    });
+  });
 });

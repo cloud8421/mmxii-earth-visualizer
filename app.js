@@ -6,9 +6,9 @@
 var express = require('express')
   , routes = require('./routes/routes')
   , http = require('http')
-  , path = require('path');
-
-var app = express();
+  , path = require('path')
+  , app = express.createServer()
+  , io   = require('socket.io');
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
@@ -30,6 +30,17 @@ app.get('/', routes.index);
 
 app.get('/api.json', routes.api);
 
-http.createServer(app).listen(app.get('port'), function(){
+var server = http.createServer(app);
+
+server.listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
+});
+
+var sio = io.listen(server);
+
+sio.sockets.on('connection', function (socket) {
+  socket.emit('news', { hello: 'world' });
+  socket.on('my other event', function (data) {
+    console.log(data);
+  });
 });

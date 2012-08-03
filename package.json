@@ -20,5 +20,12 @@
     "grunt-reload": "~0.2.0",
     "grunt-shell": "~0.1.2",
     "node-dev": "~0.2.5"
+  },
+  "subdomain": "mmxii-earth-visualizer",
+  "scripts": {
+    "start": "app.js"
+  },
+  "engines": {
+    "node": "0.6.x"
   }
 }
