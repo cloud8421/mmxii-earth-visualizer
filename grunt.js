@@ -20,7 +20,7 @@ module.exports = function(grunt) {
     },
     watch: {
       files: 'client/src/**/*.coffee',
-      tasks: 'coffee concat min reload'
+      tasks: 'coffee concat min'
     },
     concat: {
       app: {
@@ -30,6 +30,8 @@ module.exports = function(grunt) {
       vendor: {
         src: [ 'vendor/app/jquery.min.js',
                'vendor/app/jstorage.js',
+               'vendor/app/modernizr.foundation.js',
+               'vendor/app/jquery.foundation.reveal.js',
                'vendor/app/shuffle.js',
                'vendor/app/moment.js',
                'vendor/app/mustache.js',

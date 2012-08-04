@@ -6,11 +6,7 @@ window.MmxiiEarth = {
 };
 
 $(document).ready(function() {
-  var socket, tweets;
+  var tweets;
   tweets = new MmxiiEarth.Collections.Tweets;
-  new MmxiiEarth.Views.EarthPlotter;
-  socket = io.connect('http://localhost');
-  return socket.on('data', function(data) {
-    return tweets.add(data.source);
-  });
+  return new MmxiiEarth.Views.EarthPlotter;
 });
