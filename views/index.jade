@@ -3,16 +3,26 @@ extends layout
 block content
   div#mainContent
     header.row
-      div.twelve.columns
+      div.ten.columns
         h1 Olympic Tweets on Earth
+      div.two.column
+        a(href="#", data-reveal-id="aboutModal") About
     div.row
       div.twelve.columns#earth-container
     footer.row
       div.twelve.columns
         p
-          Developed by 
-          a(href='http://claudio-ortolina.org') Claudio ortolina 
-          || Source on 
-          a(href='http://github.com/cloud8421/mmxii-earth-visualizer') Github 
-          || A project for 
+          Developed by
+          a(href='http://claudio-ortolina.org') Claudio ortolina
+          || Source on
+          a(href='http://github.com/cloud8421/mmxii-earth-visualizer') Github
+          || A project for
           a(href='http://mmxiihack.org') Londinium MMXII Hackathon
+    div#aboutModal.reveal-modal
+      h2 About
+      p
+        | Special thanks to 
+        a(href='http://datasift.com/') Datasift 
+        | for providing the data used in this visualization.
+      a.close-reveal-modal &#215;
+
