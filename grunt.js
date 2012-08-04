@@ -28,15 +28,14 @@ module.exports = function(grunt) {
         dest: 'public/javascripts/<%= pkg.name %>.js'
       },
       vendor: {
-        src: [ 'vendor/app/jquery.min.js',
-               'vendor/app/jstorage.js',
-               'vendor/app/modernizr.foundation.js',
-               'vendor/app/jquery.foundation.reveal.js',
-               'vendor/app/shuffle.js',
-               'vendor/app/moment.js',
-               'vendor/app/mustache.js',
-               'vendor/app/pubsub.js',
-               'vendor/app/twitter_parse.js' ],
+        src: [ 'client/vendor/jquery.min.js',
+               'client/vendor/jstorage.js',
+               'client/vendor/modernizr.foundation.js',
+               'client/vendor/jquery.foundation.reveal.js',
+               'client/vendor/moment.js',
+               'client/vendor/mustache.js',
+               'client/vendor/pubsub.js',
+               'client/vendor/twitter_parse.js' ],
         dest: 'public/javascripts/vendor.js'
       }
     },
