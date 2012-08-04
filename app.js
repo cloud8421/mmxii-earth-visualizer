@@ -8,7 +8,9 @@ var express = require('express')
   , http = require('http')
   , path = require('path')
   , app = express.createServer()
-  , io   = require('socket.io');
+  , io   = require('socket.io')
+  , DataSift = require('datasift')
+  , consumer = new DataSift('cloud8421', 'fed2b3cda097e37d8dd1f9e78779a023');
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
@@ -43,4 +45,20 @@ sio.sockets.on('connection', function (socket) {
   socket.on('my other event', function (data) {
     console.log(data);
   });
+});
+
+// consumer.connect();
+consumer.on("connect", function(){
+  consumer.subscribe('a04bf77b2b2a45228772cb1f83903259');
+});
+consumer.on("disconnect", function(){
+  console.log("Disconnected!");
+});
+consumer.on("interaction", function(obj) {
+  if(obj.data !== undefined) {
+    //console.log(obj.data);
+    sio.sockets.emit('data', {
+      source : obj.data
+    });
+  }
 });
