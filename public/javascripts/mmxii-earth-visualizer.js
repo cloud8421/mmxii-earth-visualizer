@@ -9,9 +9,13 @@ window.MmxiiEarth = {
 };
 
 $(document).ready(function() {
-  var tweets;
+  var socket, tweets;
   tweets = new MmxiiEarth.Collections.Tweets;
-  return new MmxiiEarth.Views.EarthPlotter;
+  new MmxiiEarth.Views.EarthPlotter;
+  socket = io.connect('http://localhost');
+  return socket.on('data', function(data) {
+    return tweets.add(data.source);
+  });
 });
 
 
