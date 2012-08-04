@@ -14,17 +14,17 @@ module.exports = function(grunt) {
     },
     coffee: {
       app: {
-        src: ['src/app/**/*.coffee'],
-        dest: 'compiled/app'
+        src:  'client/src/**/*.coffee',
+        dest: 'client/compiled'
       }
     },
     watch: {
-      files: 'src/**/*.coffee',
+      files: 'client/src/**/*.coffee',
       tasks: 'coffee concat min reload'
     },
     concat: {
       app: {
-        src: ['<banner:meta.banner>', 'compiled/app/<%= pkg.name %>.js', 'compiled/app/**/*.js'],
+        src: ['<banner:meta.banner>', 'client/compiled/<%= pkg.name %>.js', 'client/compiled/*.js'],
         dest: 'public/javascripts/<%= pkg.name %>.js'
       },
       vendor: {

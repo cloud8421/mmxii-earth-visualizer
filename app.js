@@ -42,7 +42,7 @@ sio.sockets.on('connection', function (socket) {
   socket.emit('news', { hello: 'world' });
 });
 
-consumer.connect();
+// consumer.connect();
 consumer.on("connect", function(){
   consumer.subscribe('a04bf77b2b2a45228772cb1f83903259');
 });

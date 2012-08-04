@@ -1,34 +1,29 @@
-# Coffeescript client-side add template
+# Mmxii Earth Tweet Visualizer
 
-This skeleton includes support for Coffeescript compilation and Jasmine BDD testing with minimal-to-none customization required.
-Just remember to change the package name (in `package.json`, `HeadlessRunner.html` and `SpecRunner.html`).
+This application visualizes tweets on a 3D globe surface.
 
-Hard dependencies:
+As an example, it uses tweets related to a certain famous sport event happening in summer 2012 in the UK.
 
-- Node
-- Npm
-- Phantom.js
+It uses the following technologies:
 
-## Grunt support
+- [WebGL Earth](http://www.webglearth.org/) to render and manipulate a 3D webgl globe
+- [DataSift](http://datasift.com/) to provide real time social data (tweets with a geolocation value)
 
-The bundled `Gruntfile` offers a few facilities:
+The application runs on a very simple Express and Socket.io stack and can be easily deployed on [Nodejitsu](http://nodejitsu.com/).
 
-- convert, concat and minify coffee files
-- a watch task that executes all of the above every time you save and runs the test suite in a headless environment
-- in addition it's  possible to use [Livereload](http://livereload.com/) by installing the browser extension and running `grunt`. Right now it works properly with Chrome.
+## Development
 
-## Headless testing
+Assuming you have Node (with npm) and Coffescript installed. After cloning the repository, cd into the project directory:
 
-It requires [Phantomjs](http://phantomjs.org/). If you're on a Mac and use Homebrew, just `brew install phantomjs`. The test task can be invoked separately by running `grunt shell`, however it's part of the `watch` task so that shouldn't be necessary.
+    npm install
 
-Alternatively, visiting [the test page](http://localhost:8000/SpecRunner.html) will run specs in the browser (better for debugging).
+To run the app server, just type:
 
-## Upcoming features
+    make devserver
 
-Not a promise, but these are some things I really want to dig into and hopefully make possible.
+All client side code is container inside `client/src`. The bundle gruntfile will take card of compiling, concatenating and minifying them in the right location.
+All you need to do is run
 
-- AMD support
+    grunt
 
-## Includes code from:
-
-- https://github.com/jcarver989/phantom-jasmine
+It will keep watching `client/src` for changes and regenerate all files.
