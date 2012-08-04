@@ -30,8 +30,6 @@ app.configure('development', function(){
 
 app.get('/', routes.index);
 
-app.get('/api.json', routes.api);
-
 var server = http.createServer(app);
 
 server.listen(app.get('port'), function(){
