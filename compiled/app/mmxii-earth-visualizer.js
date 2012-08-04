@@ -6,16 +6,11 @@ window.MmxiiEarth = {
 };
 
 $(document).ready(function() {
-  var socket;
-  window.tweets = new MmxiiEarth.Collections.Tweets;
-  tweets.fetch();
-  window.earthPlotter = new MmxiiEarth.Views.EarthPlotter(tweets.all());
-  earthPlotter.plot();
+  var socket, tweets;
+  tweets = new MmxiiEarth.Collections.Tweets;
+  new MmxiiEarth.Views.EarthPlotter;
   socket = io.connect('http://localhost');
-  return socket.on('news', function(data) {
-    console.log(data);
-    return socket.emit('my other event', {
-      my: 'data'
-    });
+  return socket.on('data', function(data) {
+    return tweets.add(data.source);
   });
 });

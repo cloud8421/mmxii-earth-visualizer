@@ -1,19 +1,19 @@
 class MmxiiEarth.Views.Marker
 
   constructor: (@earth, @tweet) ->
-    @earthMarker = @earth.initMarker @tweet.geo.coordinates...
+    @earthMarker = @earth.initMarker(@tweet.interaction.geo.latitude, @tweet.interaction.geo.longitude)
     @render()
 
   template: $('#tweet-template').html()
 
   render: ->
-    @tweet.created_at = @humanizeDate(@tweet.created_at)
-    @tweet.text = @tweet.text.parseURL().parseUsername().parseHashtag()
+    @tweet.created_at = @humanizeDate(@tweet.interaction.created_at)
+    # @tweet.text = @tweet.text.parseURL().parseUsername().parseHashtag()
     popup = Mustache.render(@template, @tweet)
     @earthMarker.bindPopup popup, 400, false
 
   rotateToMarker: ->
-    @earth.flyTo @tweet.geo.coordinates...
+    @earth.flyTo @tweet.interaction.geo.latitude, @tweet.interaction.geo.longitude
     @earthMarker.openPopup()
 
   humanizeDate: (created_at) ->
@@ -22,15 +22,22 @@ class MmxiiEarth.Views.Marker
 
 class MmxiiEarth.Views.MarkersList
 
+  started: false
+
   constructor: ->
     @list = []
     @listen()
-    setInterval =>
-      @rotate()
-    , 8000
 
   add: (marker) ->
     @list.push marker
+    @start() unless @started
+
+  start: ->
+    @rotate()
+    setInterval =>
+      @rotate()
+    , 8000
+    @started = true
 
   hide: ->
     marker.earthMarker.closePopup() for marker in @list

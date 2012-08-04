@@ -5,12 +5,9 @@ window.MmxiiEarth =
 
 $(document).ready ->
 
-  window.tweets = new MmxiiEarth.Collections.Tweets
-  tweets.fetch()
-  window.earthPlotter = new MmxiiEarth.Views.EarthPlotter(tweets.all())
-  earthPlotter.plot()
+  tweets = new MmxiiEarth.Collections.Tweets
+  new MmxiiEarth.Views.EarthPlotter
 
   socket = io.connect('http://localhost')
-  socket.on 'news', (data) ->
-    console.log data
-    socket.emit 'my other event', my: 'data'
+  socket.on 'data', (data) ->
+    tweets.add data.source

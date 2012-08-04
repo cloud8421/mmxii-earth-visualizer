@@ -6,10 +6,10 @@ html
     link(rel='stylesheet', href='/stylesheets/master.css')
     script(type='text/mustache', id="tweet-template")
       div.tweet.panel.callout.radius
-        span.label.alert.radius {{ from_user }}
+        span.label.alert.radius {{ interaction.author.name }}
         span.label.success.radius {{ created_at }}
-        img(src='{{ profile_image_url }}', alt='{{ from_user }}')
-        p {{{ text }}}
+        img(src='{{ interaction.author.avatar }}', alt='{{ interaction.author.name }}')
+        p {{{ interaction.content }}}
     script(src='http://www.webglearth.com/api.js')
     script(src='/socket.io/socket.io.js')
     script(src='/javascripts/vendor.js')

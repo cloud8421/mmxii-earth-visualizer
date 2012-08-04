@@ -1,17 +1,9 @@
 class MmxiiEarth.Collections.Tweets
 
-  # query: 'http://search.twitter.com/search.json?q=%23Olympics%20OR%20%23London2012%20OR%20%23Olympic&geocode=51.3051,-1.0543,10000km&rpp=100&callback=?'
-  query: '/api.json'
-
   constructor: ->
-    @fetch
+    @tweets = []
 
-  fetch: =>
-    $.getJSON @query, (data) ->
-      for tweet in data
-        do (tweet) ->
-          if tweet.geo isnt null
-            $.jStorage.set(tweet.id, tweet)
+  add: (tweet) ->
+    @tweets.push tweet
+    $.publish 'new_tweet', tweet
 
-  all: ->
-    shuffle($.jStorage.get(key) for key in $.jStorage.index())

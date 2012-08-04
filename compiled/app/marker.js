@@ -3,10 +3,9 @@ var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments)
 MmxiiEarth.Views.Marker = (function() {
 
   function Marker(earth, tweet) {
-    var _ref;
     this.earth = earth;
     this.tweet = tweet;
-    this.earthMarker = (_ref = this.earth).initMarker.apply(_ref, this.tweet.geo.coordinates);
+    this.earthMarker = this.earth.initMarker(this.tweet.interaction.geo.latitude, this.tweet.interaction.geo.longitude);
     this.render();
   }
 
@@ -14,15 +13,13 @@ MmxiiEarth.Views.Marker = (function() {
 
   Marker.prototype.render = function() {
     var popup;
-    this.tweet.created_at = this.humanizeDate(this.tweet.created_at);
-    this.tweet.text = this.tweet.text.parseURL().parseUsername().parseHashtag();
+    this.tweet.created_at = this.humanizeDate(this.tweet.interaction.created_at);
     popup = Mustache.render(this.template, this.tweet);
     return this.earthMarker.bindPopup(popup, 400, false);
   };
 
   Marker.prototype.rotateToMarker = function() {
-    var _ref;
-    (_ref = this.earth).flyTo.apply(_ref, this.tweet.geo.coordinates);
+    this.earth.flyTo(this.tweet.interaction.geo.latitude, this.tweet.interaction.geo.longitude);
     return this.earthMarker.openPopup();
   };
 
@@ -38,19 +35,28 @@ MmxiiEarth.Views.Marker = (function() {
 
 MmxiiEarth.Views.MarkersList = (function() {
 
+  MarkersList.prototype.started = false;
+
   function MarkersList() {
     this.rotate = __bind(this.rotate, this);
-
-    var _this = this;
     this.list = [];
     this.listen();
-    setInterval(function() {
-      return _this.rotate();
-    }, 8000);
   }
 
   MarkersList.prototype.add = function(marker) {
-    return this.list.push(marker);
+    this.list.push(marker);
+    if (!this.started) {
+      return this.start();
+    }
+  };
+
+  MarkersList.prototype.start = function() {
+    var _this = this;
+    this.rotate();
+    setInterval(function() {
+      return _this.rotate();
+    }, 8000);
+    return this.started = true;
   };
 
   MarkersList.prototype.hide = function() {
