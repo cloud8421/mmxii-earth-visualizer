@@ -43,6 +43,7 @@ module.exports = function(grunt) {
                'vendor/app/shuffle.js',
                'vendor/app/moment.js',
                'vendor/app/mustache.js',
+               'vendor/app/pubsub.js',
                'vendor/app/twitter_parse.js' ],
         dest: 'public/javascripts/vendor.js'
       }
