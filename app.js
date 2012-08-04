@@ -42,12 +42,9 @@ var sio = io.listen(server);
 
 sio.sockets.on('connection', function (socket) {
   socket.emit('news', { hello: 'world' });
-  socket.on('my other event', function (data) {
-    console.log(data);
-  });
 });
 
-// consumer.connect();
+consumer.connect();
 consumer.on("connect", function(){
   consumer.subscribe('a04bf77b2b2a45228772cb1f83903259');
 });
@@ -56,7 +53,6 @@ consumer.on("disconnect", function(){
 });
 consumer.on("interaction", function(obj) {
   if(obj.data !== undefined) {
-    //console.log(obj.data);
     sio.sockets.emit('data', {
       source : obj.data
     });
