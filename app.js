@@ -4,7 +4,6 @@
  */
 
 var express = require('express')
-  , routes = require('./routes/routes')
   , http = require('http')
   , path = require('path')
   , app = express.createServer()
@@ -28,7 +27,9 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-app.get('/', routes.index);
+app.get('/', function(req, res){
+  res.render('index', { title: 'Express' });
+});
 
 var server = http.createServer(app);
 

@@ -14,6 +14,8 @@ MmxiiEarth.Views.Marker = (function() {
   Marker.prototype.render = function() {
     var popup;
     this.tweet.created_at = this.humanizeDate(this.tweet.interaction.created_at);
+    console.log(this.tweet.interaction);
+    this.tweet.text = this.tweet.interaction.content.parseURL().parseUsername().parseHashtag();
     popup = Mustache.render(this.template, this.tweet);
     return this.earthMarker.bindPopup(popup, 400, false);
   };
@@ -55,7 +57,7 @@ MmxiiEarth.Views.MarkersList = (function() {
     this.rotate();
     setInterval(function() {
       return _this.rotate();
-    }, 8000);
+    }, 4000);
     return this.started = true;
   };
 

@@ -1,4 +1,4 @@
-/*! mmxii-earth-visualizer - v0.0.1 - 2012-08-05
+/*! mmxii-earth-visualizer - v0.0.3 - 2012-08-05
 * Copyright (c) 2012 Claudio Ortolina; Licensed  */
 
 
@@ -12,7 +12,7 @@ $(document).ready(function() {
   var socket, tweets;
   tweets = new MmxiiEarth.Collections.Tweets;
   new MmxiiEarth.Views.EarthPlotter;
-  socket = io.connect('http://mmxii-earth-visualizer.jit.su/');
+  socket = io.connect('http://localhost/');
   return socket.on('data', function(data) {
     return tweets.add(data.source);
   });
@@ -58,6 +58,8 @@ MmxiiEarth.Views.Marker = (function() {
   Marker.prototype.render = function() {
     var popup;
     this.tweet.created_at = this.humanizeDate(this.tweet.interaction.created_at);
+    console.log(this.tweet.interaction);
+    this.tweet.text = this.tweet.interaction.content.parseURL().parseUsername().parseHashtag();
     popup = Mustache.render(this.template, this.tweet);
     return this.earthMarker.bindPopup(popup, 400, false);
   };
@@ -99,7 +101,7 @@ MmxiiEarth.Views.MarkersList = (function() {
     this.rotate();
     setInterval(function() {
       return _this.rotate();
-    }, 8000);
+    }, 4000);
     return this.started = true;
   };
 

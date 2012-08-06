@@ -8,7 +8,8 @@ class MmxiiEarth.Views.Marker
 
   render: ->
     @tweet.created_at = @humanizeDate(@tweet.interaction.created_at)
-    # @tweet.text = @tweet.text.parseURL().parseUsername().parseHashtag()
+    console.log @tweet.interaction
+    @tweet.text = @tweet.interaction.content.parseURL().parseUsername().parseHashtag()
     popup = Mustache.render(@template, @tweet)
     @earthMarker.bindPopup popup, 400, false
 
@@ -36,7 +37,7 @@ class MmxiiEarth.Views.MarkersList
     @rotate()
     setInterval =>
       @rotate()
-    , 8000
+    , 4000
     @started = true
 
   hide: ->
