@@ -1,7 +1,7 @@
 {
   "name": "mmxii-earth-visualizer",
   "description": "Olympic data on a 3D globe",
-  "version": "0.0.3-1",
+  "version": "0.0.3-3",
   "private": true,
   "author": {
     "name": "Claudio Ortolina",
@@ -11,7 +11,8 @@
     "jade": "*",
     "express": "~3.0.0rc1",
     "socket.io": "~0.9.9",
-    "datasift": "~0.2.1"
+    "datasift": "~0.2.1",
+    "mongodb": "~1.1.2"
   },
   "devDependencies": {
     "grunt": "~0.3.12",

@@ -1,4 +1,4 @@
-/*! mmxii-earth-visualizer - v0.0.3 - 2012-08-06
+/*! mmxii-earth-visualizer - v0.0.3-2 - 2012-08-09
 * Copyright (c) 2012 Claudio Ortolina; Licensed  */
 
 
